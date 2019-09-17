@@ -1,6 +1,6 @@
 
 function removeFromArray(arr, elt) {
-  
+
   for (var i = arr.length - 1; i >= 0; i--) {
     if (arr[i] == elt) {
       arr.splice(i, 1);
@@ -8,9 +8,12 @@ function removeFromArray(arr, elt) {
   }
 }
 
+function sleep (time) {
+  return new Promise((resolve) => setTimeout(resolve, time));
+}
 function heuristic(a, b) {
   var d = dist(a.i, a.j, b.i, b.j);
- 
+
   return d;
 }
 
@@ -35,10 +38,14 @@ var w, h;
 var path = [];
 
 function setup() {
-  createCanvas(400, 400);
-  console.log('A*');
 
- 
+  createCanvas(800, 600);
+  sleep(1000).then(() => {
+    console.log('A*');
+})
+
+
+
   w = width / cols;
   h = height / rows;
 
@@ -92,16 +99,16 @@ function draw() {
     removeFromArray(openSet, current);
     closedSet.push(current);
 
-   
+
     var neighbors = current.neighbors;
     for (var i = 0; i < neighbors.length; i++) {
       var neighbor = neighbors[i];
 
-      
+
       if (!closedSet.includes(neighbor) && !neighbor.wall) {
         var tempG = current.g + heuristic(neighbor, current);
 
-   
+
         var newPath = false;
         if (openSet.includes(neighbor)) {
           if (tempG < neighbor.g) {
@@ -114,7 +121,7 @@ function draw() {
           openSet.push(neighbor);
         }
 
-      
+
         if (newPath) {
           neighbor.h = heuristic(neighbor, end);
           neighbor.f = neighbor.g + neighbor.h;
@@ -123,7 +130,7 @@ function draw() {
       }
 
     }
- 
+
   } else {
     console.log('no solution');
     noLoop();

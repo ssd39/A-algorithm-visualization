@@ -6,10 +6,56 @@
     <script language="javascript" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.dom.min.js"></script>
     <script language="javascript" type="text/javascript" src="sketch.js"></script>
     <script language="javascript" type="text/javascript" src="spot.js"></script>
+    <style> @import url('https://fonts.googleapis.com/css?family=Poppins:900&display=swap');
+#loader {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Poppins', sans-serif;
+  font-size: 36px;
+}
+.loading-a {
+  width: 90px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.loading-a-item:nth-child(1) {
+  animation: bouncing 0.4s alternate infinite cubic-bezier(0.6, 0.05, 0.15, 0.95);
+}
+.loading-a-item:nth-child(2) {
+  animation: bouncing 0.4s 0.1s alternate infinite cubic-bezier(0.6, 0.05, 0.15, 0.95) backwards;
+}
+.loading-a-item:nth-child(3) {
+  animation: bouncing 0.4s 0.2s alternate infinite cubic-bezier(0.6, 0.05, 0.15, 0.95) backwards;
+}
+@keyframes bouncing {
+  0% {
+    transform: translate3d(0, 10px, 0) scale(1.2, 0.85);
+  }
+  100% {
+    transform: translate3d(0, -20px, 0) scale(0.9, 1.1);
+  }
+}
+</style>
 </head>
 
 <body>
+  <div class="loading-a" id="loader">
+    <div class="loading-a-item">@</div>
+    <div class="loading-a-item">_</div>
+    <div class="loading-a-item">@</div>
+</div>
+
   <h1>A*</h1>
+  <script> setTimeout(()=>{
+	loader =document.getElementById('loader')
+	loader.style.display = "none"
+	container = document.getElementById('container')
+	container.style.display = 'block'},
+1000); </script>
 </body>
 
 </html>
